@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f3">
+  <meta name="description" content="伯邑美系統家居，從丈量、設計到施工，打造兼具美感與實用的生活空間。服務台南、高雄、嘉義。">
+  <title>伯邑美系統家居｜把日常，收進喜歡的樣子</title>
+
+  <!--
+    圖片請使用先前 ZIP 內的 assets 資料夾：
+    assets/dressing.webp
+    assets/wardrobe.webp
+    assets/cover.webp
+    assets/kitchen-cabinet.webp
+  -->
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600&display=swap");
+
+    :root {
+      --paper: #f8f7f3;
+      --cream: #f0ede5;
+      --ink: #383930;
+      --muted: #85847a;
+      --olive: #6c7058;
+      --line: #dddcd3;
+      --serif: "Noto Serif TC", "Songti TC", serif;
+      --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--olive);
+      outline-offset: 5px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--serif);
+      font-weight: 500;
+    }
+
+    h2 {
+      font-size: clamp(30px, 3.2vw, 43px);
+      line-height: 1.6;
+      letter-spacing: .035em;
+    }
+
+    h3 {
+      line-height: 1.7;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    ::selection {
+      background: #ddd7c7;
+    }
+
+    .section-shell {
+      max-width: 1440px;
+      margin: auto;
+      padding-right: 6%;
+      padding-left: 6%;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: .2em;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -60px;
+      left: 20px;
+      z-index: 100;
+      padding: 8px 20px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    .site-header {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      height: 100px;
+      padding: 0 4.5%;
+      border-bottom: 1px solid #deddd555;
+      background: var(--paper);
+    }
+
+    .brand {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 48px;
+      fill: none;
+      stroke: var(--ink);
+      stroke-width: 1.15;
+      stroke-linecap: square;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 23px;
+      font-weight: 500;
+      line-height: 1.45;
+      letter-spacing: .15em;
+    }
+
+    .brand-text strong span {
+      margin-left: 8px;
+      font-size: 14px;
+      letter-spacing: .11em;
+    }
+
+    .brand-text small {
+      display: block;
+      margin-top: 4px;
+      font-size: 7px;
+      letter-spacing: .23em;
+    }
+
+    .desktop-nav {
+      display: flex;
+      gap: 29px;
+      margin-left: auto;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .desktop-nav a::after {
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      content: "";
+      transition: width .2s;
+    }
+
+    .desktop-nav a:hover::after {
+      width: 100%;
+    }
+
+    .header-cta {
+      padding: 11px 18px;
+      border: 1px solid #737768;
+      font-size: 12px;
+      letter-spacing: .06em;
+      white-space: nowrap;
+    }
+
+    .header-cta span {
+      margin-left: 18px;
+    }
+
+    .header-cta:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .menu-toggle,
+    .mobile-menu {
+      display: none;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 45% 55%;
+      max-width: 1600px;
+      min-height: 720px;
+      margin: auto;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 64px 9% 46px 13.3%;
+    }
+
+    .hero-copy .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 9px;
+      letter-spacing: .14em;
+      white-space: nowrap;
+    }
+
+    .tiny-line {
+      display: inline-block;
+      width: 22px;
+      height: 1px;
+      background: var(--olive);
+    }
+
+    .hero h1 {
+      margin: 27px -20px 23px 0;
+      font-size: clamp(46px, 4.65vw, 69px);
+      line-height: 1.35;
+      letter-spacing: .02em;
+    }
+
+    .last-line {
+      display: block;
+    }
+
+    .title-dot {
+      color: var(--olive);
+    }
+
+    .hero-description {
+      color: #7b7c71;
+      font-size: 13px;
+      line-height: 2.2;
+      letter-spacing: .05em;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 29px;
+      white-space: nowrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+      min-height: 52px;
+      padding: 15px 24px;
+      font-size: 12px;
+      letter-spacing: .08em;
+      transition: background .2s, color .2s;
+    }
+
+    .button-dark {
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .button-dark:hover {
+      border-color: var(--olive);
+      background: var(--olive);
+    }
+
+    .button-light {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .button-light:hover {
+      background: #dfdbc9;
+    }
+
+    .button-outline {
+      border: 1px solid var(--line);
+    }
+
+    .button-outline:hover {
+      background: var(--cream);
+    }
+
+    .text-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 7px 0;
+      border-bottom: 1px solid #a2a294;
+      font-size: 12px;
+      line-height: 1.7;
+      white-space: nowrap;
+    }
+
+    .text-button:hover {
+      color: var(--olive);
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: auto;
+      padding-top: 44px;
+    }
+
+    .location-icon {
+      color: var(--olive);
+      font-family: serif;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .hero-bottom p {
+      font-size: 11px;
+      letter-spacing: .05em;
+    }
+
+    .hero-bottom small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 7px;
+      letter-spacing: .1em;
+      white-space: nowrap;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 720px;
+      overflow: hidden;
+      background: #c4baa4;
+    }
+
+    .hero-visual > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-position: 50% 48%;
+    }
+
+    .hero-visual::after {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(34, 27, 15, .24),
+        transparent 22%,
+        transparent 65%,
+        rgba(24, 21, 13, .55)
+      );
+      content: "";
+    }
+
+    .photo-topline {
+      position: absolute;
+      top: 27px;
+      right: 32px;
+      left: 32px;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      color: #fff9ed;
+      font-size: 10px;
+      letter-spacing: .15em;
+    }
+
+    .photo-topline span:last-child {
+      font-size: 8px;
+      letter-spacing: .2em;
+    }
+
+    .photo-caption {
+      position: absolute;
+      right: 118px;
+      bottom: 49px;
+      left: 35px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--paper);
+    }
+
+    .caption-rule {
+      width: 30px;
+      height: 1px;
+      background: #e8e3d1;
+    }
+
+    .photo-caption small {
+      font-size: 8px;
+      letter-spacing: .2em;
+    }
+
+    .photo-caption p {
+      margin-top: 4px;
+      font-family: var(--serif);
+      font-size: 20px;
+      letter-spacing: .15em;
+    }
+
+    .photo-number {
+      align-self: flex-end;
+      margin-left: auto;
+      font-size: 15px;
+      letter-spacing: .1em;
+    }
+
+    .photo-number i {
+      margin-left: 7px;
+      color: #e8e3d1a3;
+      font-size: 10px;
+      font-style: normal;
+      letter-spacing: 0;
+    }
+
+    .slide-controls {
+      position: absolute;
+      right: 30px;
+      bottom: 47px;
+      z-index: 2;
+      display: flex;
+      gap: 10px;
+    }
+
+    .slide-controls button {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #faf7eb77;
+      border-radius: 50%;
+      color: #fff9ed;
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .slide-controls button:hover {
+      background: #fff9ed;
+      color: var(--ink);
+    }
+
+    .image-credit {
+      position: absolute;
+      bottom: 17px;
+      left: 35px;
+      z-index: 2;
+      color: #e3dcc9b5;
+      font-size: 8px;
+      letter-spacing: .05em;
+    }
+
+   
